@@ -10,6 +10,7 @@ include 'koneksi.php';
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/85550cfb5f.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap');
 
@@ -22,10 +23,10 @@ include 'koneksi.php';
 <body class=" bg-gray-200">
     <!-- Navbar -->
     <div class="w-full shadow-md fixed bg-white">
-        <nav class="container mx-auto flex justify-between items-center h-28 ">
+        <nav class="w-[50%] mx-auto flex justify-between items-center h-28 ">
             <div class="logo flex space-x-2 items-center">
                 <img src="assets/logo/logo.png" class="w-[60px] h-[60px]" alt="Belum ada">
-                <p class="text-2xl font-bold">Refresh Juice</p>
+                <p class="text-lg font-bold">Refresh Juice</p>
             </div>
             <ul class="flex space-x-10">
                 <li><a class="text-orange-600 font-bold" href="#">Beranda</a></li>
@@ -45,7 +46,7 @@ include 'koneksi.php';
         </nav>
     </div>
     <!-- End Navbar -->
-    <div class="container mx-auto min-w-[40%] text-xl">
+    <div class="w-[50%] mx-auto min-w-[400px] text-lg">
 
 
         <!-- Konten Produk -->
@@ -106,19 +107,7 @@ include 'koneksi.php';
     <!-- END MODAL -->
 
     <!-- SCRIPT JS -->
-    <script>
-    const modalOpenButton = document.getElementById('modal-open-button');
-    const modalCloseButton = document.getElementById('modal-close-button');
-    const modal = document.getElementById('modal');
-
-    modalOpenButton.addEventListener('click', () => {
-        modal.classList.remove('hidden');
-    });
-
-    modalCloseButton.addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
-    </script>
+    <script src="script.js"></script>
 
 </body>
 
@@ -131,24 +120,41 @@ include 'koneksi.php';
 function items($query)
 {
 ?>
-<div class="grid grid-cols-4 gap-5 pt-32 mb-20">
+<div class="grid grid-cols-3 gap-5 pt-32 mb-20 w-full">
     <?php
         while ($row = mysqli_fetch_array($query)) {
         ?>
-    <form method="post" class="card-produk w-[350px] h-[500px] rounded-lg shadow-md border bg-white">
-        <input type="hidden" name="id" value="<?= $row['id_produk'] ?>">
+    <div method="post" class="card-produk w-[100%] pb-5 rounded-lg shadow-md border bg-white">
         <input type="hidden" name="id_kategori" value="<?= $row['id_kategori'] ?>">
         <div class="">
-            <img src="<?= $row['gambar'] ?>" alt="" class="w-full h-[350px] rounded-lg">
-            <div class="px-5 py-2 space-y-1">
-                <p class="text-orange-400 font-bold text-2xl"><?= $row['nama_produk'] ?></p>
-                <p class="text-base">Rp.<?= $row['harga'] ?></p>
+            <img src="<?= $row['gambar'] ?>" alt="" class="w-full h-[300px] rounded-lg">
+            <div class="px-5 py-2 space-y-1 overflow-hidden">
+                <input class="text-orange-400 font-bold text-2xl w-full outline-none border-none" readonly
+                    value="<?= $row['nama_produk'] ?>">
                 <p><?= $row['deskripsi'] ?></p>
-                <input type="submit" value="Beli" name="submit-beli"
-                    class="w-full py-2 rounded-lg bg-orange-600 text-white cursor-pointer hover:bg-orange-700">
+                <div class="container w-full space-y-2">
+                    <input type="hidden" name="id" class="product-id" value="<?= $row['id_produk'] ?>">
+                    <input type="hidden" name="id" class="user-id" value="1">
+                    <input type="number" class="text-base product-price" value="<?= $row['harga'] ?>" readonly>
+                    <button
+                        class="buy-btn w-full bg-orange-400 text-white font-bold text-lg rounded-md px-4 py-2">Beli</button>
+                    <div class="quantity justify-between flex items-center space-x-2 hidden">
+                        <button
+                            class="minus-btn bg-orange-400 text-white font-bold text-lg rounded-md px-3 py-1">-</button>
+                        <input type="number" class="product-quantity w-16 text-center" value="0" min="0" readonly>
+                        <button
+                            class="plus-btn bg-orange-400 text-white font-bold text-lg rounded-md px-3 py-1">+</button>
+                    </div>
+                    <input type="hidden" class="total" name="total" value="Rp 0" readonly>
+                </div>
+
+
+
+
+
             </div>
         </div>
-    </form>
+    </div>
 
     <?php
         }
