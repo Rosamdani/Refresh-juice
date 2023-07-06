@@ -133,8 +133,8 @@ function items($query)
                     value="<?= $row['nama_produk'] ?>">
                 <p><?= $row['deskripsi'] ?></p>
                 <div class="container w-full space-y-2">
-                    <input type="hidden" name="id" class="product-id" value="<?= $row['id_produk'] ?>">
-                    <input type="hidden" name="id" class="user-id" value="1">
+                    <input type="hidden" class="product-id" value="<?=$row['id_produk']?>">
+                    <input type="hidden" class="user-id" value="1">
                     <input type="number" class="text-base product-price" value="<?= $row['harga'] ?>" readonly>
                     <button
                         class="buy-btn w-full bg-orange-400 text-white font-bold text-lg rounded-md px-4 py-2">Beli</button>
@@ -147,11 +147,6 @@ function items($query)
                     </div>
                     <input type="hidden" class="total" name="total" value="Rp 0" readonly>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>
