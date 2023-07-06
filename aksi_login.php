@@ -28,6 +28,7 @@ function login(){
         }
     }else{
         echo "Username atau Password Salah!";
+        exit;
     }
 
     setKuki($userID);
@@ -36,6 +37,35 @@ function login(){
 
 //Function untuk register
 function register(){
+    global $koneksi;
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    $re_password = md5($_POST['re_password']);
+    $no_telp = "";
+    $alamat = "";
+    if(isset($_POST['no_telp']) AND isset($_POST['alamat'])){
+        $no_telp = $_POST['no_telp'];
+        $alamat = $_POST['no_telp'];
+    }
+
+    $sql = "SELECT * FROM user WHERE username = '$username' LIMIT 1";
+    $query = mysqli_query($koneksi, $sql);
+
+    if($query->num_rows > 0){
+        echo "Username sudah ada, silahkan login";
+        exit;
+    }
+
+    $sql = "INSERT INTO user (username, password, no_telp, alamat) VALUES ('$username', '$password','$no_telp', '$alamat')";
+    $query = mysqli_query($koneksi, $sql);
+
+    if($query){
+        login();
+    }
+
+
+
+
 
 }
 
