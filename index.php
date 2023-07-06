@@ -1,5 +1,6 @@
 <?php
 include 'koneksi.php';
+include 'cek_sesi.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,6 +120,7 @@ include 'koneksi.php';
 
 function items($query)
 {
+    global $userID;
 ?>
 <div class="grid grid-cols-3 gap-5 pt-32 mb-20 w-full">
     <?php
@@ -134,7 +136,7 @@ function items($query)
                 <p><?= $row['deskripsi'] ?></p>
                 <div class="container w-full space-y-2">
                     <input type="hidden" class="product-id" value="<?=$row['id_produk']?>">
-                    <input type="hidden" class="user-id" value="1">
+                    <input type="hidden" class="user-id" value="<?=@$userID?>">
                     <input type="number" class="text-base product-price" value="<?= $row['harga'] ?>" readonly>
                     <button
                         class="buy-btn w-full bg-orange-400 text-white font-bold text-lg rounded-md px-4 py-2">Beli</button>
