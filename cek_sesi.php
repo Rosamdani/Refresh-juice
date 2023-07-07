@@ -17,17 +17,15 @@ if (isset($_COOKIE['sessionID'])) {
     $row = mysqli_fetch_assoc($result);
     $userID = $row['user_id'];
     $statuLogin = true;
-    echo "Berhasil login";
   } else {
     // Session ID tidak valid, pengguna belum login atau session telah kedaluwarsa
     // Redirect ke halaman login atau melakukan tindakan lain
-    echo "Anda belum login";
+    
   }
 
-  $koneksi->close();
 } else {
   // Cookie sessionID tidak tersedia, Anda belum login
   // Redirect ke halaman login atau melakukan tindakan lain
-  echo "Anda belum login";
+  
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 include 'koneksi.php';
 include 'cek_sesi.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +39,22 @@ include 'cek_sesi.php';
             <div class="flex space-x-7 text-orange-400">
                 <button type="button" id="modal-open-button"><i
                         class="fa-solid fa-magnifying-glass hover:text-orange-600"></i></button>
+                <?php
+                
+                if(isset($_COOKIE['sessionID'])){
+                    ?>
+
                 <a href="#"><i class="fa-solid fa-cart-shopping hover:text-orange-600"></i></a>
                 <a href="#"><i class="fa-solid fa-user hover:text-orange-600"></i></a>
+
+                <?php
+                }else{
+                    ?>
+                <a href="login.php" class="px-3 py-2 rounded text-white bg-orange-400">Login</a>
+                <?php
+                }
+
+                ?>
 
 
 
@@ -49,10 +64,8 @@ include 'cek_sesi.php';
     <!-- End Navbar -->
     <div class="w-[50%] mx-auto min-w-[400px] text-lg">
 
-
         <!-- Konten Produk -->
         <?php
-
         if (isset($_GET['cari'])) { // Jika pengguna melakukan pencarian
             $key = $_GET['cari'];
             $sql = "SELECT * FROM produk WHERE nama_produk = '$key'";
@@ -66,7 +79,6 @@ include 'cek_sesi.php';
         } else { // Jika pengguna tidak melakukan pencarian
             $sql = "SELECT * FROM produk";
             $query = mysqli_query($koneksi, $sql);
-
             if ($query->num_rows > 0) {
                 items($query);
             }
@@ -75,6 +87,9 @@ include 'cek_sesi.php';
         ?>
     </div>
     <!-- End Konten Produk -->
+
+
+    <!-- Menampilkan total produk dan total harga -->
 
     <!-- Footer -->
     <footer class="w-full pt-20 border-t-[7px] bg-white border-orange-400 h-[400px]">
@@ -89,20 +104,18 @@ include 'cek_sesi.php';
         <div
             class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white w-1/3 rounded-lg shadow-lg p-6">
             <h2 class="text-lg font-semibold mb-4">Form Pencarian</h2>
-            <form method="get">
-                <div class="mb-4">
+            <div class="mb-4">
+                <form method="get">
                     <label for="search" class="block mb-2 text-sm font-medium text-gray-700">Kata kunci</label>
                     <input type="text" id="search" name="cari"
                         class="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:border-blue-500"
                         placeholder="Masukkan kata kunci">
-                </div>
-                <div class="flex justify-end">
-                    <button type="submit"
-                        class="bg-orange-400 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded">Cari</button>
-                    <button id="modal-close-button"
-                        class="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold px-4 py-2 rounded">Batal</button>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="flex justify-end">
+                <button data-modal-hide="modal" id="modal-close-button"
+                    class="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold px-4 py-2 rounded">Batal</button>
+            </div>
         </div>
     </div>
     <!-- END MODAL -->
@@ -147,7 +160,7 @@ function items($query)
                         <button
                             class="plus-btn bg-orange-400 text-white font-bold text-lg rounded-md px-3 py-1">+</button>
                     </div>
-                    <input type="hidden" class="total" name="total" value="Rp 0" readonly>
+                    <input type="hidden" class="total" name="total" value="0" readonly>
                 </div>
             </div>
         </div>

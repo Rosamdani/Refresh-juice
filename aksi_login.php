@@ -77,13 +77,7 @@ function setKuki($userID){
     // Menyimpan session ID ke dalam cookie
     setcookie('sessionID', $sessionID, time() + (86400 * 30), '/'); // Cookie berlaku selama 30 hari
     
-    // Menyimpan session ID ke dalam session
-    $_SESSION['sessionID'] = $sessionID;
-    
-    echo "Sesi anda adalah : ";
-    echo $sessionID;
-
-    
+    //Memasukkan session ke dalam database
     $query = "INSERT INTO tabel_session (session_id, user_id) VALUES ('$sessionID', '$userID')";
     $result = mysqli_query($koneksi, $query);
     
@@ -97,7 +91,6 @@ function setKuki($userID){
       echo "Error: " . mysqli_error($koneksi);
     }
     
-    $koneksi->close();
 }
 
 ?>
