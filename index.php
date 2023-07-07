@@ -19,6 +19,21 @@ include 'cek_sesi.php';
     * {
         font-family: 'poppins';
     }
+
+    .with-badge {
+        position: relative;
+    }
+
+    .with-badge::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #FF3A3A;
+    }
     </style>
 </head>
 
@@ -44,7 +59,7 @@ include 'cek_sesi.php';
                 if(isset($_COOKIE['sessionID'])){
                     ?>
 
-                <a href="#"><i class="fa-solid fa-cart-shopping hover:text-orange-600"></i></a>
+                <a href="#" id="cart-btn"><i class="fa-solid fa-cart-shopping hover:text-orange-600"></i></a>
                 <a href="#"><i class="fa-solid fa-user hover:text-orange-600"></i></a>
 
                 <?php
@@ -85,6 +100,14 @@ include 'cek_sesi.php';
         }
 
         ?>
+        <div id="total-div"
+            class="fixed left-[50%] -translate-x-[50%] bottom-10 w-[60%] py-3 rounded-lg px-10 bg-orange-600 text-white flex justify-between items-center">
+            <div>
+                <p>Total Pesanan : <span id="total-quantity"></span></p>
+                <p>Total Harga: <span id="total-price"></span></p>
+            </div>
+            <a href="" class="px-3 rounded-md py-1 bg-orange-400">Lihat Keranjang</a>
+        </div>
     </div>
     <!-- End Konten Produk -->
 

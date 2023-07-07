@@ -39,9 +39,7 @@ $(document).ready(function () {
           jumlah: jumlah,
           total_harga: total_harga,
         },
-        success: function (response) {
-          console.log(response); // Tampilkan respons dari server (opsional)
-        },
+        success: function (response) {},
         error: function (xhr, status, error) {
           console.log(xhr.responseText); // Tampilkan pesan kesalahan (opsional)
         },
@@ -71,8 +69,6 @@ $(document).ready(function () {
           id_user: id_user,
         },
         success: function (response) {
-          console.log(response); // Tampilkan respons dari server (opsional)
-
           // Reset nilai jumlah dan tombol beli setelah data dihapus
           container.find(".product-quantity").val("0");
           container.find(".buy-btn").show();
@@ -110,9 +106,7 @@ $(document).ready(function () {
         jumlah: quantity,
         total_harga: total_harga,
       },
-      success: function (response) {
-        console.log(response); // Tampilkan respons dari server (opsional)
-      },
+      success: function (response) {},
       error: function (xhr, status, error) {
         console.log(xhr.responseText); // Tampilkan pesan kesalahan (opsional)
       },
@@ -145,7 +139,6 @@ $(document).ready(function () {
       checkPurchaseStatus(container, id_produk);
     }
   });
-  totalBelanja();
 });
 
 function checkPurchaseStatus(container, id_produk) {
@@ -161,7 +154,6 @@ function checkPurchaseStatus(container, id_produk) {
     success: function (response) {
       // response = JSON.parse(response); // Parse respons sebagai JSON jika tipe data adalah string
       if (response.status == "purchased") {
-        console.log("Status Berhasil : " + response.status);
         container.find(".buy-btn").hide();
         container.find(".btn-minus").show();
         container.find(".btn-plus").show();
@@ -169,7 +161,6 @@ function checkPurchaseStatus(container, id_produk) {
         container.find(".product-quantity").val(response.jumlah);
         container.find(".total").val(response.total_harga);
       } else {
-        console.log("Respon Gagal : " + response.status);
         container.find(".buy-btn").show();
         container.find(".btn-minus").hide();
         container.find(".btn-plus").hide();
@@ -177,35 +168,63 @@ function checkPurchaseStatus(container, id_produk) {
         container.find(".product-quantity").val("0");
         container.find(".total").val(0);
       }
+    },
+    error: function (xhr, status, error) {
+      console.log(xhr.responseText);
+    },
+  });
+}
 
-      // Mendapatkan semua elemen dengan class ".product-quantity"
-      var allQuantities = $(".product-quantity");
+$(document).ready(function () {
+  // Panggil fungsi calculateTotal() pada saat halaman pertama kali dimuat
+  calculateTotal();
 
-      // Mendapatkan semua elemen dengan class ".total"
-      var allTotal = $(".total");
+  // Tetapkan interval waktu (misalnya, 5 detik) untuk memperbarui jumlah dan harga secara berkala
+  setInterval(function () {
+    calculateTotal();
+  }, 1000); // Ganti nilai 5000 dengan interval waktu yang diinginkan (dalam milidetik)
+});
 
-      // Mendapatkan jumlah pesanan keseluruhan dan total harga
+function calculateTotal() {
+  // Mendapatkan ID pengguna dari suatu sumber (misalnya, dari elemen input)
+  var id_user = $(".user-id").val();
+
+  // Lakukan request AJAX untuk mendapatkan data terbaru dari database berdasarkan id_user
+  $.ajax({
+    type: "POST",
+    url: "get_latest_data.php",
+    data: { id_user: id_user }, // Mengirimkan id_user ke skrip PHP
+    dataType: "json",
+    success: function (response) {
+      // response = JSON.parse(response); // Parse respons sebagai JSON jika tipe data adalah string
       var totalQuantity = 0;
       var totalPrice = 0;
 
-      // Menghitung jumlah pesanan keseluruhan dan total harga
-      allQuantities.each(function () {
-        var quantity = parseInt($(this).val());
-        if (quantity != "0") {
-          totalQuantity += quantity;
-        }
-      });
+      // Lakukan perulangan untuk mengakses data terbaru dan menghitung jumlah pesanan keseluruhan dan total harga
+      // Iterasi setiap data untuk menjumlahkan quantity dan price
+      $.each(response, function (index, data) {
+        var quantity = parseInt(data.jumlah);
+        var price = parseInt(data.total_harga);
 
-      allTotal.each(function () {
-        var price = parseInt($(this).val().replace("Rp ", ""));
-        if (price != "0") {
+        if (!isNaN(quantity) && !isNaN(price)) {
+          totalQuantity += quantity;
           totalPrice += price;
         }
       });
 
       // Menampilkan jumlah pesanan keseluruhan dan total harga
-      console.log("Total harga: " + totalPrice);
-      console.log("Total jumlah: " + totalQuantity);
+      $("#total-quantity").text(totalQuantity);
+      $("#total-price").text("Rp " + totalPrice);
+
+      // Menyembunyikan atau menampilkan div berdasarkan kondisi totalQuantity
+      var button = $("#cart-btn");
+      if (totalQuantity > 0) {
+        $("#total-div").show();
+        button.addClass("with-badge");
+      } else {
+        button.removeClass("with-badge");
+        $("#total-div").hide();
+      }
     },
     error: function (xhr, status, error) {
       console.log(xhr.responseText);
