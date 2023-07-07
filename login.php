@@ -36,24 +36,45 @@
         </nav>
     </div>
     <!-- End Navbar -->
-    <div class="w-[50%] mx-auto min-w-[400px] text-lg">
+    <div class="w-[50%] pt-32 mx-auto min-w-[400px] h-[100vh] flex text-lg">
 
-        <form action="aksi_login.php" method="post" class="pt-40">
-            <?php if(isset($_GET['pesan']) == "login"){ 
-                ?>
+        <form action="aksi_login.php" method="post" class="h-full flex items-center min-w-[50%]">
+            <div class="w-full space-y-5 px-5 py-10">
+                <?php if(isset($_GET['pesan']) == "login"){ 
+                    ?>
 
-            <p class="w-full py-3 pb-10 rounded flex px-10 bg-blue-500 text-white"><span
-                    class="font-bold">Perhatian</span> :
-                Sebelum melakukan
-                pembelian, harap login atau register terlebih dahulu!</p>
+                <p class="w-full py-3 pb-10 rounded text-base flex px-10 bg-red-400 text-white"><span
+                        class="font-bold">Perhatian </span> : Sebelum melakukan pembelian, harap login atau register
+                    terlebih dahulu!</p>
 
-            <?php
-            } ?>
-            <input type="hidden" name="action" value="Login">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Login">
+                <?php
+                } ?>
+                <div class="w-full">
+                    <p class="text-4xl font-bold mb-3">Selamat Datang</p>
+                    <p>Silahkan masuk ke akun anda atau <a href="#" class="text-orange-400">Buat akun baru</a></p>
+                </div>
+                <div class="w-full">
+                    <input class="w-full h-[50px]  text-gray-500 rounded border outline-orange-400 border-gray-300 px-2"
+                        type="text" name="username" placeholder="Masukkan username">
+                </div>
+                <div class="w-full">
+                    <input class="w-full h-[50px]  text-gray-500 rounded border outline-orange-400 border-gray-300 px-2"
+                        type="password" name="password" placeholder="Masukkan password">
+                </div>
+                <div class="w-full">
+                    <a href="#" class="text-orange-400">Lupa password?</a>
+                </div>
+                <div class="w-full">
+                    <input
+                        class="w-full h-[50px] rounded bg-orange-400 mt-5 hover:bg-orange-600 font-bold text-white cursor-pointer"
+                        type="submit" value="Login">
+                </div>
+                <input type="hidden" name="action" value="Login">
+            </div>
         </form>
+        <div class="w-full h-full border">
+
+        </div>
     </div>
 </body>
 

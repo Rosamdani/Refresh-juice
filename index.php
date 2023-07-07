@@ -59,7 +59,7 @@ include 'cek_sesi.php';
                 if(isset($_COOKIE['sessionID'])){
                     ?>
 
-                <a href="#" id="cart-btn"><i class="fa-solid fa-cart-shopping hover:text-orange-600"></i></a>
+                <a href="checkout.php" id="cart-btn"><i class="fa-solid fa-cart-shopping hover:text-orange-600"></i></a>
                 <a href="#"><i class="fa-solid fa-user hover:text-orange-600"></i></a>
 
                 <?php
@@ -106,7 +106,7 @@ include 'cek_sesi.php';
                 <p>Total Pesanan : <span id="total-quantity"></span></p>
                 <p>Total Harga: <span id="total-price"></span></p>
             </div>
-            <a href="" class="px-3 rounded-md py-1 bg-orange-400">Lihat Keranjang</a>
+            <a href="checkout.php" class="px-3 rounded-md py-1 bg-orange-400">Lihat Keranjang</a>
         </div>
     </div>
     <!-- End Konten Produk -->
