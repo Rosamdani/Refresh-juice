@@ -62,7 +62,7 @@ include 'cek_sesi.php';
     </div>
     <!-- End Navbar -->
 
-
+    <input type="hidden" class="user-id" value="<?=$userID?>">
     <div class="w-[50%] mx-auto min-w-[400px] pt-32 h-[100vh] text-lg flex space-x-5">
 
         <!-- Tanggal Pengiriman -->
@@ -82,16 +82,39 @@ include 'cek_sesi.php';
                             class="w-full h-[50px] px-2 py-1 text-gray-500 rounded-md border outline-orange-400 border-gray-300"
                             placeholder="Masukkan catatan tambahan..."></textarea>
                     </div>
+                    <div class="w-full">
+                        <p id="text-xl">Total : </p>
+                        <p id="total-quantity" class="text-xl font-bold"></p>
+                    </div>
+                    <div class="w-full">
+                        <p id="text-xl">Total Harga : </p>
+                        <p id="total-price" class="text-xl font-bold"></p>
+                    </div>
+                    <div class="w-full flex space-x-5">
+                        <button
+                            class="px-3 py-2 rounded duration-300 text-white font-bold ease-in-out bg-blue-400 hover:bg-blue-600">Pesan</button>
+                        <button
+                            class="px-3 py-2 rounded duration-300 text-white font-bold ease-in-out bg-red-400 hover:bg-red-600"
+                            onclick="deleteAllData()">Batalkan semua</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Disini produk keranjang ditampilkan -->
-        <div class="kanan w-full bg-white h-full rounded-md">
+        <div id="data-container" class="kanan w-full bg-white h-full rounded-md overflow-y-auto">
 
         </div>
         <!-- End Produk keranjang -->
     </div>
+
+    <!-- Footer -->
+    <footer class="w-full pt-20 border-t-[7px] bg-white border-orange-400 h-[400px]">
+        <div class="container"></div>
+    </footer>
+    <!-- End Footer -->
+
+    <script src="checkout.js"></script>
 </body>
 
 </html>

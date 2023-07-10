@@ -83,7 +83,7 @@ function setKuki($userID){
     
     if ($result) {
       // Melanjutkan ke halaman selanjutnya setelah login/register
-      header('Location: index.php');
+      header('Location:index.php');
       exit();
     } else {
       // Terjadi kesalahan dalam menyimpan session ID ke dalam database

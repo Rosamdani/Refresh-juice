@@ -218,12 +218,15 @@ function calculateTotal() {
 
       // Menyembunyikan atau menampilkan div berdasarkan kondisi totalQuantity
       var button = $("#cart-btn");
+      var total_div = $("#total-div");
       if (totalQuantity > 0) {
-        $("#total-div").show();
+        total_div.removeClass("hidden");
+        total_div.addClass("flex");
         button.addClass("with-badge");
       } else {
         button.removeClass("with-badge");
-        $("#total-div").hide();
+        total_div.removeClass("flex");
+        total_div.addClass("hidden");
       }
     },
     error: function (xhr, status, error) {

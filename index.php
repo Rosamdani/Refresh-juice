@@ -101,7 +101,7 @@ include 'cek_sesi.php';
 
         ?>
         <div id="total-div"
-            class="fixed left-[50%] -translate-x-[50%] bottom-10 w-[60%] py-3 rounded-lg px-10 bg-orange-600 text-white flex justify-between items-center">
+            class="fixed left-[50%] hidden -translate-x-[50%] bottom-10 w-[60%] py-3 rounded-lg px-10 bg-orange-600 text-white justify-between items-center">
             <div>
                 <p>Total Pesanan : <span id="total-quantity"></span></p>
                 <p>Total Harga: <span id="total-price"></span></p>

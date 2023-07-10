@@ -11,10 +11,9 @@ $query = mysqli_query($koneksi, $sql);
 
 if ($query) {
     // Data berhasil disimpan
-    echo 'Data pembelian berhasil dihapus ke database.';
+    echo '<script>console.log("Data pembelian berhasil dihapus ke database")</script>.';
 } else {
     // Error saat menyimpan data
     echo 'Error hapus: ' . $koneksi->error;
 }
 // Tutup koneksi ke database
-$koneksi->close();
