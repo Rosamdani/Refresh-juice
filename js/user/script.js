@@ -32,7 +32,7 @@ $(document).ready(function () {
       // Kirim data ke file PHP untuk disimpan ke database menggunakan Ajax
       $.ajax({
         type: "POST",
-        url: "save_purchase.php",
+        url: "http://localhost/juice/action/user/save_purchase.php",
         data: {
           id_produk: id_produk,
           id_user: id_user,
@@ -63,7 +63,7 @@ $(document).ready(function () {
       var id_user = container.find(".user-id").val();
       $.ajax({
         type: "POST",
-        url: "delete_product.php",
+        url: "http://localhost/juice/action/user/delete_product.php",
         data: {
           id_produk: id_produk,
           id_user: id_user,
@@ -99,7 +99,7 @@ $(document).ready(function () {
     var total_harga = total;
     $.ajax({
       type: "POST",
-      url: "update_quantity.php",
+      url: "http://localhost/juice/action/user/update_quantity.php",
       data: {
         id_produk: id_produk,
         id_user: id_user,
@@ -146,7 +146,7 @@ function checkPurchaseStatus(container, id_produk) {
 
   $.ajax({
     type: "POST",
-    url: "check_purchase_status.php",
+    url: "http://localhost/juice/action/user/check_purchase_status.php",
     data: {
       id_produk: id_produk,
       id_user: id_user,
@@ -192,7 +192,7 @@ function calculateTotal() {
   // Lakukan request AJAX untuk mendapatkan data terbaru dari database berdasarkan id_user
   $.ajax({
     type: "POST",
-    url: "get_latest_data.php",
+    url: "http://localhost/juice/action/user/get_latest_data.php",
     data: { id_user: id_user }, // Mengirimkan id_user ke skrip PHP
     dataType: "json",
     success: function (response) {

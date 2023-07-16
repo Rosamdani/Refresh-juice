@@ -2,7 +2,7 @@
 function loadProduk() {
   var id_user = $(".user-id").val();
   $.ajax({
-    url: "get_data_keranjang.php", // Ganti dengan URL ke server-side script PHP Anda
+    url: "http://localhost/juice/action/user/get_data_keranjang.php", // Ganti dengan URL ke server-side script PHP Anda
     method: "POST",
     data: { id_user: id_user },
     dataType: "json",
@@ -110,7 +110,7 @@ function buttonProduk() {
       // Hapus data produk dari database pesanan menggunakan Ajax
       $.ajax({
         type: "POST",
-        url: "delete_product.php",
+        url: "http://localhost/juice/action/user/../../action/user/delete_product.php",
         data: {
           id_produk: id_produk,
           id_user: id_user,
@@ -145,7 +145,7 @@ function buttonProduk() {
     var total_harga = total;
     $.ajax({
       type: "POST",
-      url: "update_quantity.php",
+      url: "http://localhost/juice/action/user/../../action/user/update_quantity.php",
       data: {
         id_produk: id_produk,
         id_user: id_user,
@@ -176,7 +176,7 @@ function deleteAllData() {
     // Menghapus semua data produk dari database menggunakan Ajax
     $.ajax({
       type: "POST",
-      url: "delete_all_data.php",
+      url: "http://localhost/juice/action/user/../../action/user/delete_all_data.php",
       data: {
         id_user: id_user,
       },

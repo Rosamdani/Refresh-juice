@@ -144,7 +144,7 @@ include 'cek_sesi.php';
     <!-- END MODAL -->
 
     <!-- SCRIPT JS -->
-    <script src="script.js"></script>
+    <script src="js/user/script.js"></script>
 
 </body>
 

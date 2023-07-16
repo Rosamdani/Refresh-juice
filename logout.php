@@ -15,6 +15,6 @@ session_unset();
 session_destroy();
 
 // Redirect ke halaman login atau halaman lain yang sesuai setelah logout
-echo "Berhasil logout";
+header("location:index.php");
 exit;
 ?>

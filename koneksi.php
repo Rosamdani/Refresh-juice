@@ -3,7 +3,6 @@
 $koneksi = mysqli_connect("localhost","root","","juice");
 
 if(!$koneksi){
-    die();
+    header("Location:timeout.php");
 }
 ?>
-

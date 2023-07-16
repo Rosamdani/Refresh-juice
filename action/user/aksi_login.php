@@ -1,6 +1,6 @@
 <?php
 
-include "koneksi.php";
+include "../../koneksi.php";
 // Mengatur session pada awal script
 session_start();
 
@@ -10,7 +10,11 @@ if(isset($_POST['action']) && isset($_POST['username']) && isset($_POST['passwor
         login();
     }else if($_POST['action'] == "Register"){
         register();
+    }else{
+        header("Location:../../timeout.php");
     }
+}else{
+    header("Location:../../not_found.php");
 }
 
 //Function untuk login
@@ -83,7 +87,7 @@ function setKuki($userID){
     
     if ($result) {
       // Melanjutkan ke halaman selanjutnya setelah login/register
-      header('Location:index.php');
+      header('Location:../../index.php');
       exit();
     } else {
       // Terjadi kesalahan dalam menyimpan session ID ke dalam database

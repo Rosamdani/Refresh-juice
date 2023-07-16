@@ -38,7 +38,7 @@
     <!-- End Navbar -->
     <div class="w-[50%] pt-32 mx-auto min-w-[400px] h-[100vh] flex text-lg">
 
-        <form action="aksi_login.php" method="post" class="h-full flex items-center min-w-[50%]">
+        <form action="action/user/aksi_login.php" method="post" class="h-full flex items-center min-w-[50%]">
             <div class="w-full space-y-5 px-5 py-10">
                 <?php if(isset($_GET['pesan']) == "login"){ 
                     ?>

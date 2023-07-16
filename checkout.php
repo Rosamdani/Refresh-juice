@@ -114,7 +114,7 @@ include 'cek_sesi.php';
     </footer>
     <!-- End Footer -->
 
-    <script src="checkout.js"></script>
+    <script src="js/user/checkout.js"></script>
 </body>
 
 </html>
